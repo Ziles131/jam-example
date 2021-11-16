@@ -1,17 +1,23 @@
-import express from 'express';
-import next from 'next';
-import helmet from 'helmet';
-import bodyParser from 'bodyParser';
-import cors from 'cors';
+// import express from 'express';
+// import next from 'next';
+// import helmet from 'helmet';
+// import bodyParser from 'bodyParser';
+// import cors from 'cors';
 
-import routes from '../routes';
+// import routes from '../routes';
+const next = require('next');
+const path = require('path');
+const helmet = require('helmet');
+const api = require('../src/services/api');
+const express = require('express');
+// const routes = require('../routes');
 
 const app = next({
   dev: process.env.NODE_ENV !== 'production',
   dir: path.join(__dirname, '../'),
 });
 
-const handle = routes.getRequestHandler()
+const handle = app.getRequestHandler();
 
 app.prepare().then(() => {
   const server = express();
@@ -33,8 +39,9 @@ app.prepare().then(() => {
 
   server.get('*', handle);
 
-  server.listen(3000, (err) => {
+  server.listen(3030, (err) => {
     if (err) throw err;
-    console.log('Ready on ...');
+    console.log('Start Jamendo React Next Server v0.0.1');
+    console.log(`Ready on http://localhost:3030`);
   })
 })

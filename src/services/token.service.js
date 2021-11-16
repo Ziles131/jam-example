@@ -36,4 +36,5 @@ const TokenService = {
   removeUser,
 };
 
-export default TokenService;
+// export default TokenService;
+module.exports = TokenService;

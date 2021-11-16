@@ -1,8 +1,11 @@
-import axios from "axios";
-import TokenService from "./token.service";
+// import axios from "axios";
+// import TokenService from "./token.service";
+
+const axios = require('axios');
+const TokenService = require('./token.service');
 
 const instance = axios.create({
-  baseURL: "http://localhost:3000/api",
+  baseURL: "http://localhost:3030/api",
   headers: {
     "Content-Type": "application/json",
   },
@@ -10,6 +13,7 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   (config) => {
+    console.log('INSIDE REQUEST of api: ')
     const token = TokenService.getLocalAccessToken();
     if (token) {
       // config.headers["Authorization"] = 'Bearer ' + token;  // for Spring Boot back-end
@@ -53,4 +57,5 @@ instance.interceptors.response.use(
   }
 );
 
-export default instance;
+// export default instance;
+module.exports = instance;
